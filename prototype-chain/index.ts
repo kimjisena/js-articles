@@ -26,6 +26,7 @@ function isEmpty (list: List): boolean {
 }
 
 function replaceFirst (element: any, list: List): List {
+  list = Object.create(list.__proto__);
   list.value = element;
   return list;
 }

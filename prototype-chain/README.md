@@ -210,6 +210,7 @@ Now let's implement our functions.
 
     ```js
     function replaceFirst (element, list) {
+      list = Object.create(list.__proto__);
       list.value = element;
       return list;
     }
