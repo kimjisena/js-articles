@@ -1,4 +1,4 @@
-# Flexin' the JavaScript Prototype Chain
+# Flexin' The JavaScript Prototype Chain
 
 ## Context
 
