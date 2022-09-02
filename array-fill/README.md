@@ -3,7 +3,7 @@
 ## Introduction
 So how do you initialize your dynamic arrays? When we create arrays using the `Array` constructor, we get a "holey" array so to speak. The resulting array has a defined `length` but it's filled with holes. Most of the time we need to initialize the array, and like many other things in JavaScript, there's a million ways to do just that (well not exactly). In this article, we will explore ways we can initialize arrays in JavaScript with a particular focus on `Array.prototype.fill()`. Ready?
 
-## Initalizing Arrays
+## Initializing Arrays
 ### 1. Array literal syntax
 If we know the contents of the array beforehand, it is good practice to initialize our array using the array literal syntax, like so:
 ```js
