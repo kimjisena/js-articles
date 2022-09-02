@@ -7,7 +7,7 @@ So how do you initialize your dynamic arrays? When we create arrays using the `A
 ### 1. Array literal syntax
 If we know the contents of the array beforehand, it is good practice to initialize our array using the array literal syntax, like so:
 ```js
-let fibs = [0, 1, 1, 2, 3, 5, 8];
+let fibs = [5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5,];
 ```
 
 ### 2. Initialization loop
@@ -71,8 +71,8 @@ Why all this talk of primitives and objects you ask? Well, it's because they beh
 
 For instance, consider the three objects `obj1`, `obj2` and `obj3` below:
 ```js
-let obj1 = {x: 1, y: 2};
-let obj2 = {x: 1, y: 2};
+let obj1 = {x: 1, y: 2,};
+let obj2 = {x: 1, y: 2,};
 let obj3 = obj2;
 
 console.log(obj1 === obj2); // => false
@@ -194,7 +194,7 @@ console.log(arr[0] === arr[1]); // => true: arr[0] and arr[1] are references to 
 ### Debugging ZigZag
 So, what should we do when we want to initialize an array with different objects?
 
-Well, one obvious solution is to revisit our old friend: initialization loop.
+Well, one obvious solution is to revisit our old friend: the initialization loop.
 ```js
 function notSoBuggyZigZagConversion (str, numRows) {
   ... // omitted details
@@ -242,21 +242,18 @@ In both of these cases, our `fillUnique()` method will have the same implementat
 
 Modifying the prototype directly is not optimal and can get messy quickly, but it gets the job done. Defining `Array.prototype.fillUnique()` immediatelly makes that method available to all arrays. Nice.
 
-Here's our `Array.prototype.fillUnique`:
+Here's our `Array.prototype.fillUnique()` method:
 ```js
 Array.prototype.fillUnique = function (value, start, end) {
   if(value && typeof value === 'object') {
     const isArray = Array.isArray(value);
     let copy;
 
-    start = start = start && start < 0 ? this.length + start : start ? start : 0;
+    start = start && start < 0 ? this.length + start : start ? start : 0;
     end = end && end < 0 ? this.length + end : end ? end : this.length;
+
     for(let i = start; i < end; i++) {
-      if (isArray) {
-        copy = [...value];
-      } else {
-        copy = Object.assign({}, value);
-      }
+      copy = isArray ? [...value] : {...value};
       this[i] = copy;
     }
     return this;
@@ -275,7 +272,7 @@ And that's it, no more subtle bugs!
 ### `CustomArray` extends `Array`
 Using a custom class is more elegant because it documents our intent: We need an array but with added functionality. We can also implement methods that are specific to our use case on this custom class without cluttering the prototype chain. Way cool.
 
-Here's our `CustomArray` class:
+Here's our `CustomArray()` class:
 ```js
 class CustomArray extends Array {
   constructor (length) {
@@ -291,11 +288,7 @@ class CustomArray extends Array {
       end = end && end < 0 ? this.length + end : end ? end : this.length;
 
       for(let i = start; i < end; i++) {
-        if (isArray) {
-          copy = [...value];
-        } else {
-          copy = Object.assign({}, value);
-        }
+        copy = isArray ? [...value] : {...value};
         this[i] = copy;
       }
       return this;
